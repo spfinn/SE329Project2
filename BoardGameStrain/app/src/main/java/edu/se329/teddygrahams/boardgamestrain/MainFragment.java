@@ -1,10 +1,8 @@
 package edu.se329.teddygrahams.boardgamestrain;
 
 import android.app.Fragment;
-import android.app.FragmentManager;
 import android.app.FragmentTransaction;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -18,12 +16,12 @@ import java.util.ArrayList;
 /**
  * Created by bkallaus on 9/28/14.
  */
-public class MainFragment extends Fragment{
+public class MainFragment extends Fragment {
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.fragment_main, container, false);
-        Log.e("BackStackers","BackStack: "+getFragmentManager().getBackStackEntryCount());
+        View view = inflater.inflate(R.layout.fragment_main, null, false);
+
         setAdapters(view);
 
         return view;
@@ -45,7 +43,7 @@ public class MainFragment extends Fragment{
         findGame.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                FragmentTransaction transact =  getFragmentManager().beginTransaction();
+                FragmentTransaction transact =  getActivity().getFragmentManager().beginTransaction();
                 ResultFragment fragment = new ResultFragment();
                 Bundle bundle = new Bundle();
 
@@ -53,7 +51,10 @@ public class MainFragment extends Fragment{
                 bundle.putStringArray("results",result);
 
                 fragment.setArguments(bundle);
-                transact.replace(R.id.content_main, fragment).addToBackStack(null).commit();
+                transact.replace(R.id.content_main, fragment);
+                transact.addToBackStack(null);
+                transact.commit();
+
             }
         });
 
