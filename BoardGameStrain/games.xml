@@ -1,0 +1,99 @@
+<games>
+	<game>
+		<title>The Settlers of Catan</title>
+		<minplayers>3</minplayers>
+		<maxplayers>4</maxplayers>
+		<length>90</length>
+	</game>
+	<game>
+		<title>Risk</title>
+		<minplayers>2</minplayers>
+		<maxplayers>6</maxplayers>
+		<length>120</length>
+	</game>
+	<game>
+		<title>7 Wonders</title>
+		<minplayers>2</minplayers>
+		<maxplayers>7</maxplayers>
+		<length>30</length>
+	</game>
+	<game>
+		<title>Twilight Imperium (Third Edition)</title>
+		<minplayers>3</minplayers>
+		<maxplayers>6</maxplayers>
+		<length>360</length>
+	</game>
+	<game>
+		<title>Ticket to Ride</title>
+		<minplayers>3</minplayers>
+		<maxplayers>5</maxplayers>
+		<length>45</length>
+	</game>
+	<game>
+		<title>Small Word</title>
+		<minplayers>2</minplayers>
+		<maxplayers>5</maxplayers>
+		<length>80</length>
+	</game>
+	<game>
+		<title>The Resistance</title>
+		<minplayers>5</minplayers>
+		<maxplayers>10</maxplayers>
+		<length>30</length>
+	</game>
+	<game>
+		<title>Battlestar Galactica</title>
+		<minplayers>3</minplayers>
+		<maxplayers>6</maxplayers>
+		<length>180</length>
+	</game>
+	<game>
+		<title>Eight Minute Empire</title>
+		<minplayers>2</minplayers>
+		<maxplayers>5</maxplayers>
+		<length>8</length>
+	</game>
+	<game>
+		<title>Star Wars: X-Wing Miniatures Game</title>
+		<minplayers>2</minplayers>
+		<maxplayers>2</maxplayers>
+		<length>30</length>
+	</game>
+	<game>
+		<title>Imperial Settlers</title>
+		<minplayers>1</minplayers>
+		<maxplayers>4</maxplayers>
+		<length>60</length>
+	</game>
+	<game>
+		<title>Legendary: A Marvel Deck Building Game</title>
+		<minplayers>1</minplayers>
+		<maxplayers>5</maxplayers>
+		<length>45</length>
+	</game>
+	<game>
+		<title>Twilight Struggle</title>
+		<minplayers>2</minplayers>
+		<maxplayers>2</maxplayers>
+		<length>180</length>
+	</game>
+	<game>
+		<title>Robinson Crusoe: Adventure on the Cursed Island</title>
+		<minplayers>1</minplayers>
+		<maxplayers>4</maxplayers>
+		<length>120</length>
+	</game>
+	<game>
+		<title>Dominion</title>
+		<minplayers>2</minplayers>
+		<maxplayers>40</maxplayers>
+		<length>30</length>
+	</game>
+	<game>
+		<title>Pandemic</title>
+		<minplayers>2</minplayers>
+		<maxplayers>4</maxplayers>
+		<length>45</length>
+	</game>
+</games>
+	
