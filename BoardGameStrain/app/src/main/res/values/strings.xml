@@ -4,8 +4,10 @@
     <string name="app_name">Board Game Strain</string>
     <string name="hello_world">Hello world!</string>
     <string name="action_settings">Settings</string>
-    <string name="minplayers">Minimum Players</string>
-    <string name="maxplayers">Maximum Players</string>
+    <string name="minplayers">Minimum </string>
+    <string name="maxplayers">Maximum </string>
+    <string name="players"> Players</string>
+    <string name="hours"> Hours</string>
     <string name="lengthgame">Length of Game</string>
     <string name="submitbutton">Find Games</string>
     <string name="gamemechanic">Mechanic</string>

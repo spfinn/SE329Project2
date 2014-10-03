@@ -7,6 +7,9 @@ import android.util.Xml;
 import org.xmlpull.v1.XmlPullParser;
 import org.xmlpull.v1.XmlPullParserException;
 
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.InputStream;
 import java.net.HttpURLConnection;
@@ -26,7 +29,8 @@ public class XMLPullingUtil {
             protected Integer doInBackground(String... params) {
                 try {
 
-                    InputStream str = generateInputStream(params[0]);
+//                    InputStream str = generateInputStream(params[0]);
+                    InputStream str = readInputStreamFile();
                     XmlPullParser parser = Xml.newPullParser();
                     parser.setFeature(XmlPullParser.FEATURE_PROCESS_NAMESPACES, false);
                     parser.setInput(str, null);
@@ -77,6 +81,16 @@ public class XMLPullingUtil {
         return mTitle;
     }
 
+    private InputStream readInputStreamFile(){
+        try {
+            InputStream stream = new FileInputStream(new File("games.xml"));
+            return stream;
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        }
+return null;
+    }
+
     private InputStream generateInputStream(String urlString) throws IOException {
         URL url = new URL(urlString);
         HttpURLConnection conn = (HttpURLConnection) url.openConnection();
@@ -102,8 +116,8 @@ public class XMLPullingUtil {
                 continue;
             }
             String name = parser.getName();
-            if (name.equals("name")) {
-                title = readTag(parser, "name");
+            if (name.equals("title")) {
+                title = readTag(parser, "title");
                 Log.i("Name",title);
             } else if (name.equals("minplayers")) {
                 min = Integer.parseInt(readTag(parser, "minplayers"));
@@ -111,8 +125,8 @@ public class XMLPullingUtil {
             } else if (name.equals("maxplayers")) {
                 max = Integer.parseInt(readTag(parser, "maxplayers"));
                 Log.i("Max","Max: "+max);
-            } else if (name.equals("playingtime")) {
-                length = Integer.parseInt(readTag(parser, "playingtime"));
+            } else if (name.equals("length")) {
+                length = Integer.parseInt(readTag(parser, "length"));
             } else if (name.equals("rating")) {
                 length = Integer.parseInt(readTag(parser, "rating"));
             } else {
