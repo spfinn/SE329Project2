@@ -28,17 +28,34 @@ public class MainFragment extends Fragment {
     }
 
     public void setAdapters(View view){
-        Spinner numPlayers = (Spinner) view.findViewById(R.id.numPlayersSpinner);
+        Spinner minPlayers = (Spinner) view.findViewById(R.id.minPlayersSpinner);
+        Spinner maxPlayers = (Spinner) view.findViewById(R.id.maxPlayersSpinner);
         Spinner lengthOfGame = (Spinner) view.findViewById(R.id.lengthOfGame);
         Button findGame = (Button) view.findViewById(R.id.submit_button);
 
-        ArrayList<String> shit = new ArrayList<String>();
-        shit.add("The Boogey Man");
-        shit.add("Duck Duck Grey Duck");
-        shit.add("Solitaire");
-        shit.add("Cliff Diving");
-        numPlayers.setAdapter(new myTextAdapter(shit));
-        lengthOfGame.setAdapter(new myTextAdapter(shit));
+        ArrayList<String> numPlayers = new ArrayList<String>();
+        numPlayers.add("1");
+        numPlayers.add("2");
+        numPlayers.add("3");
+        numPlayers.add("4");
+        numPlayers.add("5");
+        numPlayers.add("6");
+        numPlayers.add("7");
+        numPlayers.add("8");
+        numPlayers.add("9");
+        numPlayers.add("10");
+        numPlayers.add("10+");
+
+        ArrayList<String> gameLength = new ArrayList<String>();
+        gameLength.add("30 or less");
+        gameLength.add("30 to 60");
+        gameLength.add("60-120");
+        gameLength.add("120-240");
+        gameLength.add("240 or more");
+
+        minPlayers.setAdapter(new myTextAdapter(numPlayers));
+        maxPlayers.setAdapter(new myTextAdapter(numPlayers));
+        lengthOfGame.setAdapter(new myTextAdapter(numPlayers));
 
         findGame.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -57,10 +74,7 @@ public class MainFragment extends Fragment {
 
             }
         });
-
-
     }
-
 
     class myTextAdapter extends BaseAdapter{
         private ArrayList<String> adapterText;

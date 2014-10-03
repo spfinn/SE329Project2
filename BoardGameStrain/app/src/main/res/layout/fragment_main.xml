@@ -17,16 +17,38 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@string/numplayers"
+            android:text="@string/minplayers"
             android:textSize="@dimen/medium_text" />
 
         <Spinner
-            android:id="@+id/numPlayersSpinner"
+            android:id="@+id/minPlayersSpinner"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginLeft="@dimen/item_margin"></Spinner>
+    </LinearLayout>
 
 
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="1px"
+        android:background="@color/line" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/maxplayers"
+            android:textSize="@dimen/medium_text" />
+
+        <Spinner
+            android:id="@+id/maxPlayersSpinner"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="@dimen/item_margin"></Spinner>
     </LinearLayout>
 
     <RelativeLayout
@@ -65,10 +87,5 @@
         android:layout_marginTop="@dimen/item_margin"
         android:text="@string/submitbutton"
         android:textSize="@dimen/medium_text" />
-
-    <RelativeLayout
-        android:layout_width="match_parent"
-        android:layout_height="1px"
-        android:background="@color/line" />
 
 </LinearLayout>
