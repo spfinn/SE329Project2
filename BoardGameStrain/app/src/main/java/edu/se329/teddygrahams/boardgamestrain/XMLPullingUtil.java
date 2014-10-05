@@ -1,5 +1,7 @@
 package edu.se329.teddygrahams.boardgamestrain;
 
+import android.content.Context;
+import android.content.res.AssetManager;
 import android.os.AsyncTask;
 import android.util.Log;
 import android.util.Xml;
@@ -23,39 +25,35 @@ public class XMLPullingUtil {
     private String mTitle;
     private static final String ns = null;
 
-    public  XMLPullingUtil(String url,  final OnItemParsedListener listener ){
+    public  XMLPullingUtil(final Context context, final OnItemParsedListener listener ){
+
         new AsyncTask<String, BoardGame, Integer>() {
             @Override
             protected Integer doInBackground(String... params) {
                 try {
+                    AssetManager assetManager = context.getAssets();
 
-//                    InputStream str = generateInputStream(params[0]);
-                    InputStream str = readInputStreamFile();
+                    InputStream str =  assetManager.open("games.xml");
                     XmlPullParser parser = Xml.newPullParser();
                     parser.setFeature(XmlPullParser.FEATURE_PROCESS_NAMESPACES, false);
                     parser.setInput(str, null);
                     parser.nextTag();
 
-                    parser.require(XmlPullParser.START_TAG, ns, "rss");
+                    parser.require(XmlPullParser.START_TAG, ns, "games");
 
                     while (parser.next() != XmlPullParser.END_TAG) {
                         if (parser.getEventType() != XmlPullParser.START_TAG) {
                             continue;
                         }
                         String name = parser.getName();
-                        // Starts by looking for the entry tag
-                        if(name.equals("channel")) {
-                            continue;
-                        }
 
-                        if (name.equals("item")) {
+                        if (name.equals("game")) {
                             publishProgress(readEntry(parser));
-                        } else if(name.equals("name")) {
-                            mTitle = readTag(parser, "name");
+                        } else if(name.equals("title")) {
+                            mTitle = readTag(parser, "title");
                         }else {
                             skip(parser);
                         }
-
                     }
                     str.close();
 
@@ -72,23 +70,13 @@ public class XMLPullingUtil {
                 listener.itemParsed(values[0]);
                 super.onProgressUpdate(values);
             }
-        }.execute(url);
+        }.execute();
 
 
     }
 
     public String getTitle(){
         return mTitle;
-    }
-
-    private InputStream readInputStreamFile(){
-        try {
-            InputStream stream = new FileInputStream(new File("games.xml"));
-            return stream;
-        } catch (FileNotFoundException e) {
-            e.printStackTrace();
-        }
-return null;
     }
 
     private InputStream generateInputStream(String urlString) throws IOException {
@@ -105,7 +93,7 @@ return null;
 
 
     private BoardGame readEntry(XmlPullParser parser) throws XmlPullParserException, IOException {
-        parser.require(XmlPullParser.START_TAG, ns, "item");
+        parser.require(XmlPullParser.START_TAG, ns, "game");
         String title = null;
         int min = 0;
         int max = 0;
@@ -118,13 +106,10 @@ return null;
             String name = parser.getName();
             if (name.equals("title")) {
                 title = readTag(parser, "title");
-                Log.i("Name",title);
             } else if (name.equals("minplayers")) {
                 min = Integer.parseInt(readTag(parser, "minplayers"));
-                Log.i("Min","Min: "+min);
             } else if (name.equals("maxplayers")) {
                 max = Integer.parseInt(readTag(parser, "maxplayers"));
-                Log.i("Max","Max: "+max);
             } else if (name.equals("length")) {
                 length = Integer.parseInt(readTag(parser, "length"));
             } else if (name.equals("rating")) {

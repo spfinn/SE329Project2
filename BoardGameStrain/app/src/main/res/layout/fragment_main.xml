@@ -8,7 +8,6 @@
     android:id="@+id/content_fragment"
     android:paddingTop="@dimen/activity_vertical_margin">
 
-
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -17,48 +16,13 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@string/minplayers"
+            android:text="@string/players"
             android:textSize="@dimen/medium_text" />
-
         <Spinner
-            android:id="@+id/minPlayersSpinner"
+            android:id="@+id/playersSpinner"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginLeft="@dimen/item_margin"></Spinner>
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@string/players"
-            android:textSize="@dimen/medium_text" />
-    </LinearLayout>
-
-
-    <RelativeLayout
-        android:layout_width="match_parent"
-        android:layout_height="1px"
-        android:background="@color/line" />
-
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal">
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@string/maxplayers"
-            android:textSize="@dimen/medium_text" />
-
-        <Spinner
-            android:id="@+id/maxPlayersSpinner"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="@dimen/item_margin"></Spinner>
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@string/players"
-            android:textSize="@dimen/medium_text" />
     </LinearLayout>
 
     <RelativeLayout
@@ -86,7 +50,7 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@string/hours"
+            android:text="@string/minutes"
             android:textSize="@dimen/medium_text" />
 
     </LinearLayout>

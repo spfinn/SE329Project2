@@ -29,36 +29,31 @@ public class MainFragment extends Fragment {
     }
 
     public void setAdapters(View view){
-        final Spinner minPlayers = (Spinner) view.findViewById(R.id.minPlayersSpinner);
-        final Spinner maxPlayers = (Spinner) view.findViewById(R.id.maxPlayersSpinner);
-        Spinner lengthOfGame = (Spinner) view.findViewById(R.id.lengthOfGame);
+        final Spinner numPlayersView = (Spinner) view.findViewById(R.id.playersSpinner);
+        final Spinner lengthOfGame = (Spinner) view.findViewById(R.id.lengthOfGame);
         Button findGame = (Button) view.findViewById(R.id.submit_button);
 
-        ArrayList<Integer> numPlayers = new ArrayList<Integer>();
-        for (int i = 0; i < 11; i++)
+        final ArrayList<Integer> numPlayers = new ArrayList<Integer>();
+        for (int i = 1; i < 11; i++)
             numPlayers.add(i);
 
-        ArrayList<Double> gameLength = new ArrayList<Double>();
-        for (double i = 0.0; i < 11; i+=0.5)
+        ArrayList<Integer> gameLength = new ArrayList<Integer>();
+        for (int i = 0; i < 360; i = i + 30)
             gameLength.add(i);
 
-        minPlayers.setAdapter(new myIntegerAdapter(numPlayers));
-        maxPlayers.setAdapter(new myIntegerAdapter(numPlayers));
-        lengthOfGame.setAdapter(new myDoubleAdapter(gameLength));
+        numPlayersView.setAdapter(new myIntegerAdapter(numPlayers));
+        lengthOfGame.setAdapter(new myIntegerAdapter(gameLength));
 
         findGame.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                if(((Integer)minPlayers.getSelectedItem())>((Integer)maxPlayers.getSelectedItem())) {
-                    Toast.makeText(getActivity(),"min greater than max players",Toast.LENGTH_SHORT).show();
-                    return;
-                }
+
                 FragmentTransaction transact =  getActivity().getFragmentManager().beginTransaction();
                 ResultFragment fragment = new ResultFragment();
                 Bundle bundle = new Bundle();
 
-                String[] result = {"Risk","Monopoly","Connect Four"};
-                bundle.putStringArray("results",result);
+                bundle.putInt("numPlayers", ((Integer) numPlayersView.getSelectedItem()));
+                bundle.putInt("gameLength",((Integer) lengthOfGame.getSelectedItem()));
 
                 fragment.setArguments(bundle);
                 transact.replace(R.id.content_main, fragment);
@@ -99,34 +94,5 @@ public class MainFragment extends Fragment {
         }
     }
 
-    class myDoubleAdapter extends BaseAdapter{
-        private ArrayList<Double> adapterDouble;
-        public myDoubleAdapter(ArrayList<Double> adapterText){
-            this.adapterDouble = adapterText;
-        }
-
-        @Override
-        public int getCount() {
-            return adapterDouble.size();
-        }
-
-        @Override
-        public Object getItem(int i) {
-            return adapterDouble.get(i);
-        }
-
-        @Override
-        public long getItemId(int i) {
-            return i;
-        }
-
-        @Override
-        public View getView(int i, View view, ViewGroup viewGroup) {
-            TextView text = new TextView(getActivity());
-            text.setTextSize(24);
-            text.setText(adapterDouble.get(i)+"");
-            return text;
-        }
-    }
 
 }
