@@ -62,6 +62,9 @@ public class XMLPullingUtil {
                 } catch (IOException e) {
                     e.printStackTrace();
                 }
+                BoardGame game = new BoardGame("No Games Found");
+                game.setEnd();
+                publishProgress(game);
                 return 0;
             }
 
@@ -70,6 +73,7 @@ public class XMLPullingUtil {
                 listener.itemParsed(values[0]);
                 super.onProgressUpdate(values);
             }
+
         }.execute();
 
 

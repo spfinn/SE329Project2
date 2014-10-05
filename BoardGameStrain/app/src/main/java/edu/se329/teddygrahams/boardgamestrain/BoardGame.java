@@ -10,6 +10,7 @@ public class BoardGame {
     private int maxPlayers;
     private int playTime;
     private int ratingValue;
+    private boolean end = false;
 
     public BoardGame (String name){
         this.name = name;
@@ -30,6 +31,15 @@ public class BoardGame {
         playTime = play;
         ratingValue = rating;
     }
+
+    public void setEnd(){
+        end = true;
+    }
+
+    public boolean isEnd(){
+        return end;
+    }
+
 
     public int getMinPlayers() {
         return minPlayers;
@@ -62,6 +72,8 @@ public class BoardGame {
     public void setName(String name) {
         this.name = name;
     }
+
+
 
 }
 

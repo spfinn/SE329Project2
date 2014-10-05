@@ -20,20 +20,21 @@ import java.util.ArrayList;
  */
 public class ResultFragment extends Fragment {
     private int numPlayers;
-    private double gameLength;
-    private ArrayList<BoardGame> gameBoard = new ArrayList<BoardGame>();
+    private int min;
+    private int max;
+    private ArrayList<BoardGame> gameBoard;
     private ResultsListAdapter adapter;
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
 
         View view = inflater.inflate(R.layout.fragment_result, container, false);
-        ListView list = (ListView) view.findViewById(R.id.result_view);
-
+        final ListView list = (ListView) view.findViewById(R.id.result_view);
+        gameBoard = new ArrayList<BoardGame>();
         numPlayers = getArguments().getInt("numPlayers");
-        gameLength = getArguments().getInt("gameLength");
+        min = getArguments().getInt("min");
+        max = getArguments().getInt("max");
         Log.i("Number of Player","Players: "+ numPlayers);
-        Log.i("Length of Game","Length: "+ gameLength);
 
         adapter = new ResultsListAdapter();
         list.setAdapter(adapter);
@@ -41,10 +42,14 @@ public class ResultFragment extends Fragment {
         new XMLPullingUtil(getActivity(), new OnItemParsedListener() {
             @Override
             public void itemParsed(BoardGame game) {
-                if(numPlayers >= game.getMinPlayers() &&
-                        numPlayers <= game.getMaxPlayers()
-                        && gameLength >= game.getPlayTime()
-                        ) {
+                if(game.isEnd() && gameBoard.size()==0) {
+                        gameBoard.add(game);
+                        adapter.notifyDataSetChanged();
+                        return;
+                }
+
+                if(numPlayers >= game.getMinPlayers() && numPlayers <= game.getMaxPlayers()
+                        && game.getPlayTime() >= min && game.getPlayTime() <= max  ) {
                     gameBoard.add(game);
                     adapter.notifyDataSetChanged();
                 }else{
@@ -76,13 +81,24 @@ class ResultsListAdapter extends BaseAdapter{
     @Override
     public View getView(final int i, View view, ViewGroup viewGroup) {
         TextView text = new TextView(getActivity());
-        text.setPadding(32, 16, 0, 16);
+        text.setPadding(0, 16, 0, 16);
         text.setTextSize(24);
         text.setText(gameBoard.get(i).getName());
+        if(!gameBoard.get(i).isEnd())
         text.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Toast.makeText(getActivity(),gameBoard.get(i).getName(), Toast.LENGTH_LONG).show();
+                DescriptionFragment desc = new DescriptionFragment();
+                Bundle bundle = new Bundle();
+                BoardGame game = gameBoard.get(i);
+                bundle.putString("title", game.getName());
+                bundle.putInt("max", game.getMaxPlayers());
+                bundle.putInt("min", game.getMinPlayers());
+                bundle.putInt("length", game.getPlayTime());
+
+                desc.setArguments(bundle);
+
+                getFragmentManager().beginTransaction().replace(R.id.content_main, desc).addToBackStack(null).commit();
             }
         });
         return text ;

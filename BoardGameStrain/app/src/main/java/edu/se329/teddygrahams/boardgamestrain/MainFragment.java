@@ -30,7 +30,8 @@ public class MainFragment extends Fragment {
 
     public void setAdapters(View view){
         final Spinner numPlayersView = (Spinner) view.findViewById(R.id.playersSpinner);
-        final Spinner lengthOfGame = (Spinner) view.findViewById(R.id.lengthOfGame);
+        final Spinner min = (Spinner) view.findViewById(R.id.minLengthOfGame);
+        final Spinner max = (Spinner) view.findViewById(R.id.maxLengthOfGame);
         Button findGame = (Button) view.findViewById(R.id.submit_button);
 
         final ArrayList<Integer> numPlayers = new ArrayList<Integer>();
@@ -38,22 +39,29 @@ public class MainFragment extends Fragment {
             numPlayers.add(i);
 
         ArrayList<Integer> gameLength = new ArrayList<Integer>();
-        for (int i = 0; i < 360; i = i + 30)
+        for (int i = 0; i <= 360; i = i + 30)
             gameLength.add(i);
 
         numPlayersView.setAdapter(new myIntegerAdapter(numPlayers));
-        lengthOfGame.setAdapter(new myIntegerAdapter(gameLength));
+        min.setAdapter(new myIntegerAdapter(gameLength));
+        max.setAdapter(new myIntegerAdapter(gameLength));
 
         findGame.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
 
+                if(((Integer) min.getSelectedItem())> ((Integer) max.getSelectedItem()))
+                {
+                    Toast.makeText(getActivity(),"Game Length Not Possible",Toast.LENGTH_SHORT).show();
+                    return;
+                }
                 FragmentTransaction transact =  getActivity().getFragmentManager().beginTransaction();
                 ResultFragment fragment = new ResultFragment();
                 Bundle bundle = new Bundle();
 
                 bundle.putInt("numPlayers", ((Integer) numPlayersView.getSelectedItem()));
-                bundle.putInt("gameLength",((Integer) lengthOfGame.getSelectedItem()));
+                bundle.putInt("min", ((Integer) min.getSelectedItem()));
+                bundle.putInt("max", ((Integer) max.getSelectedItem()));
 
                 fragment.setArguments(bundle);
                 transact.replace(R.id.content_main, fragment);
