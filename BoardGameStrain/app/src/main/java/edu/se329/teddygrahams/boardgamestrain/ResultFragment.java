@@ -24,6 +24,7 @@ public class ResultFragment extends Fragment {
     private int max;
     private ArrayList<BoardGame> gameBoard;
     private ResultsListAdapter adapter;
+
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -47,7 +48,7 @@ public class ResultFragment extends Fragment {
                         adapter.notifyDataSetChanged();
                         return;
                 }
-
+                //Checks to see if a game meets requirements.
                 if(numPlayers >= game.getMinPlayers() && numPlayers <= game.getMaxPlayers()
                         && game.getPlayTime() >= min && game.getPlayTime() <= max  ) {
                     gameBoard.add(game);
@@ -61,6 +62,9 @@ public class ResultFragment extends Fragment {
         return view;
     }
 
+    /**
+     * Hidden adapter to create a results listview adapter.
+     */
 class ResultsListAdapter extends BaseAdapter{
 
     @Override

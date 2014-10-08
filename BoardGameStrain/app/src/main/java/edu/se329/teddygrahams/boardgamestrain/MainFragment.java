@@ -15,7 +15,7 @@ import android.widget.Toast;
 import java.util.ArrayList;
 
 /**
- * Created by bkallaus on 9/28/14.
+ * starting point of the program. This hosts the area for querying and would pass on requirements for board games.
  */
 public class MainFragment extends Fragment {
 
@@ -28,6 +28,10 @@ public class MainFragment extends Fragment {
         return view;
     }
 
+    /**
+     * Generic Method used to set up private adapters that are hidden.
+     * @param view
+     */
     public void setAdapters(View view){
         final Spinner numPlayersView = (Spinner) view.findViewById(R.id.playersSpinner);
         final Spinner min = (Spinner) view.findViewById(R.id.minLengthOfGame);
@@ -35,6 +39,7 @@ public class MainFragment extends Fragment {
         Button findGame = (Button) view.findViewById(R.id.submit_button);
 
         final ArrayList<Integer> numPlayers = new ArrayList<Integer>();
+
         for (int i = 1; i < 11; i++)
             numPlayers.add(i);
 
@@ -72,6 +77,9 @@ public class MainFragment extends Fragment {
         });
     }
 
+    /**
+     * Simple Adapter to create text views to be set in the spinner view.
+     */
     class myIntegerAdapter extends BaseAdapter{
         private ArrayList<Integer> adapterInteger;
         public myIntegerAdapter(ArrayList<Integer> adapterText){

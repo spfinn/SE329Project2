@@ -9,7 +9,7 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 
 /**
- * Created by bkallaus on 10/5/14.
+ * Fragment used to show a basic description of a given boardgame.
  */
 public class DescriptionFragment extends Fragment {
     @Nullable

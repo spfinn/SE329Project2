@@ -2,6 +2,8 @@ package edu.se329.teddygrahams.boardgamestrain;
 
 /**
  * Created by bkallaus on 9/29/14.
+ * A model used to hold data about specific board games.
+ * Arrays of this object will be searched and returned if it meets the search criteria.
  */
 public class BoardGame {
 
