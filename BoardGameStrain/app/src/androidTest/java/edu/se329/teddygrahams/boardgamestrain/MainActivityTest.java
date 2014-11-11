@@ -29,6 +29,16 @@ public class MainActivityTest extends ActivityInstrumentationTestCase2<MainActiv
         assertEquals(mActivity.getFragmentManager().getBackStackEntryCount(),0);
     }
 
+    public void testXMLPulling(){
+        new XMLPullingUtil(mActivity, new OnItemParsedListener() {
+            @Override
+            public void itemParsed(BoardGame game) {
+                assertNotSame(game.getName(),"No Games Found");
+            }
+        });
+
+    }
+
     //insert networking test cases
 
 }
