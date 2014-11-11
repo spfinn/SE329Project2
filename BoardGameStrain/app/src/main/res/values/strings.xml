@@ -9,6 +9,7 @@
     <string name="minutes"> Minutes</string>
     <string name="lengthgame">Length of Game</string>
     <string name="submitbutton">Find Games</string>
+    <string name="showall">Show All Games</string>
     <string name="gamemechanic">Mechanic</string>
 
 </resources>

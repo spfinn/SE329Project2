@@ -22,6 +22,7 @@ public class ResultFragment extends Fragment {
     private int numPlayers;
     private int min;
     private int max;
+    private boolean showAll;
     private ArrayList<BoardGame> gameBoard;
     private ResultsListAdapter adapter;
 
@@ -31,10 +32,13 @@ public class ResultFragment extends Fragment {
 
         View view = inflater.inflate(R.layout.fragment_result, container, false);
         final ListView list = (ListView) view.findViewById(R.id.result_view);
+
         gameBoard = new ArrayList<BoardGame>();
         numPlayers = getArguments().getInt("numPlayers");
         min = getArguments().getInt("min");
         max = getArguments().getInt("max");
+        showAll = getArguments().getBoolean("all");
+
         Log.i("Number of Player","Players: "+ numPlayers);
 
         adapter = new ResultsListAdapter();
@@ -49,7 +53,10 @@ public class ResultFragment extends Fragment {
                         return;
                 }
                 //Checks to see if a game meets requirements.
-                if(numPlayers >= game.getMinPlayers() && numPlayers <= game.getMaxPlayers()
+                if(showAll){
+                    gameBoard.add(game);
+                    adapter.notifyDataSetChanged();
+                }else if(numPlayers >= game.getMinPlayers() && numPlayers <= game.getMaxPlayers()
                         && game.getPlayTime() >= min && game.getPlayTime() <= max  ) {
                     gameBoard.add(game);
                     adapter.notifyDataSetChanged();

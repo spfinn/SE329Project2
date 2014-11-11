@@ -37,6 +37,7 @@ public class MainFragment extends Fragment {
         final Spinner min = (Spinner) view.findViewById(R.id.minLengthOfGame);
         final Spinner max = (Spinner) view.findViewById(R.id.maxLengthOfGame);
         Button findGame = (Button) view.findViewById(R.id.submit_button);
+        Button showAll = (Button) view.findViewById(R.id.show_all_button);
 
         final ArrayList<Integer> numPlayers = new ArrayList<Integer>();
         for (int i = 1; i < 11; i++)
@@ -66,12 +67,31 @@ public class MainFragment extends Fragment {
                 bundle.putInt("numPlayers", ((Integer) numPlayersView.getSelectedItem()));
                 bundle.putInt("min", ((Integer) min.getSelectedItem()));
                 bundle.putInt("max", ((Integer) max.getSelectedItem()));
-
+                bundle.putBoolean("all", false);
                 fragment.setArguments(bundle);
                 transact.replace(R.id.content_main, fragment);
                 transact.addToBackStack(null);
                 transact.commit();
 
+            }
+        });
+
+        showAll.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+                FragmentTransaction transact =  getActivity().getFragmentManager().beginTransaction();
+                ResultFragment fragment = new ResultFragment();
+                Bundle bundle = new Bundle();
+                bundle.putInt("numPlayers", 0);
+                bundle.putInt("min", 0);
+                bundle.putInt("max", 0);
+                bundle.putBoolean("all", true);
+                fragment.setArguments(bundle);
+
+                transact.replace(R.id.content_main, fragment);
+                transact.addToBackStack(null);
+                transact.commit();
             }
         });
     }
