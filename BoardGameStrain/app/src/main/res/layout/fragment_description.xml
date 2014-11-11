@@ -63,5 +63,15 @@
         android:layout_height="1px"
         android:background="@color/line" />
 
+    <TextView
+        android:id="@+id/game_notes"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textSize="@dimen/medium_text"/>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="1px"
+        android:background="@color/line" />
 
 </LinearLayout>

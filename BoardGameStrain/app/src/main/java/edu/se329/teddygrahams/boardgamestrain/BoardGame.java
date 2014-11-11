@@ -11,6 +11,7 @@ public class BoardGame {
     private int maxPlayers;
     private int playTime;
     private int ratingValue;
+    private String notes;
     private boolean end = false;
 
     public BoardGame (String name){
@@ -74,8 +75,15 @@ public class BoardGame {
         this.name = name;
     }
 
+    public String getNotes() {
+        if(notes == null)
+            return "No Notes Available";
+        return notes;
+    }
 
-
+    public void setNotes(String notes) {
+        this.notes = notes;
+    }
 }
 
 //<item objecttype="thing" objectid="7865" subtype="boardgame" collid="1108162">

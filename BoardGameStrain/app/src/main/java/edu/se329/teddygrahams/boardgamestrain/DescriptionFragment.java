@@ -23,11 +23,13 @@ public class DescriptionFragment extends Fragment {
         TextView maxPlayers = (TextView) view.findViewById(R.id.max_players);
         TextView gameLength = (TextView) view.findViewById(R.id.game_length);
         TextView gameDescription = (TextView) view.findViewById(R.id.game_description);
+        TextView gameNotes = (TextView) view.findViewById(R.id.game_notes);
 
         title.setText(game.getName());
         maxPlayers.setText("Maximum Player: " + game.getMaxPlayers());
         minPlayers.setText("Minimum Player: " + game.getMinPlayers());
         gameLength.setText("Length of Game: "+ game.getPlayTime()+" minutes");
+        gameNotes.setText(game.getNotes());
         gameDescription.setText("Not Available");
 
         return view;
