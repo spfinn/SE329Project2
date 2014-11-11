@@ -12,6 +12,7 @@ import android.widget.TextView;
  * Fragment used to show a basic description of a given boardgame.
  */
 public class DescriptionFragment extends Fragment {
+    private BoardGame game;
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -23,12 +24,15 @@ public class DescriptionFragment extends Fragment {
         TextView gameLength = (TextView) view.findViewById(R.id.game_length);
         TextView gameDescription = (TextView) view.findViewById(R.id.game_description);
 
-        title.setText(getArguments().getString("title"));
-        maxPlayers.setText("Maximum Player: " + getArguments().getInt("max"));
-        minPlayers.setText("Minimum Player: " + getArguments().getInt("min"));
-        gameLength.setText("Length of Game: "+ getArguments().get("length")+" minutes");
+        title.setText(game.getName());
+        maxPlayers.setText("Maximum Player: " + game.getMaxPlayers());
+        minPlayers.setText("Minimum Player: " + game.getMinPlayers());
+        gameLength.setText("Length of Game: "+ game.getPlayTime()+" minutes");
         gameDescription.setText("Not Available");
 
         return view;
+    }
+    public void setBoardGame(BoardGame game){
+        this.game = game;
     }
 }

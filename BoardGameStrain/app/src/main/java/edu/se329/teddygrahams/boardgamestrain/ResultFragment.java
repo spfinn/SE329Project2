@@ -142,15 +142,7 @@ class ResultsListAdapter extends BaseAdapter{
             @Override
             public void onClick(View view) {
                 DescriptionFragment desc = new DescriptionFragment();
-                Bundle bundle = new Bundle();
-                BoardGame game = gameBoard.get(i);
-                bundle.putString("title", game.getName());
-                bundle.putInt("max", game.getMaxPlayers());
-                bundle.putInt("min", game.getMinPlayers());
-                bundle.putInt("length", game.getPlayTime());
-
-                desc.setArguments(bundle);
-
+                desc.setBoardGame(gameBoard.get(i));
                 getFragmentManager().beginTransaction().replace(R.id.content_main, desc).addToBackStack(null).commit();
             }
         });
