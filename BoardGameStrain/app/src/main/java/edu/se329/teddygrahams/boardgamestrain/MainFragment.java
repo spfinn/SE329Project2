@@ -39,7 +39,6 @@ public class MainFragment extends Fragment {
         Button findGame = (Button) view.findViewById(R.id.submit_button);
 
         final ArrayList<Integer> numPlayers = new ArrayList<Integer>();
-
         for (int i = 1; i < 11; i++)
             numPlayers.add(i);
 
