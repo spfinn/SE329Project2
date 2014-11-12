@@ -10,11 +10,9 @@ import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ArrayAdapter;
 import android.widget.BaseAdapter;
 import android.widget.ListView;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -29,7 +27,7 @@ public class ResultFragment extends Fragment {
     private int max;
     private boolean showAll;
     private int sort = 2;
-    private ArrayList<BoardGame> gameBoard;
+    private ArrayList<BoardGame> gameBoardList;
     private ResultsListAdapter adapter;
 
     @Nullable
@@ -41,7 +39,7 @@ public class ResultFragment extends Fragment {
 
         setHasOptionsMenu(true);
 
-        gameBoard = new ArrayList<BoardGame>();
+        gameBoardList = new ArrayList<BoardGame>();
         numPlayers = getArguments().getInt("numPlayers");
         min = getArguments().getInt("min");
         max = getArguments().getInt("max");
@@ -53,19 +51,19 @@ public class ResultFragment extends Fragment {
         new XMLPullingUtil(getActivity(), new OnItemParsedListener() {
             @Override
             public void itemParsed(BoardGame game) {
-                if(game.isEnd() && gameBoard.size()==0) {
-                        gameBoard.add(game);
+                if(game.isEnd() && gameBoardList.size()==0) {
+                        gameBoardList.add(game);
                         adapter.notifyDataSetChanged();
                         return;
                 }
                 //Checks to see if a game meets requirements.
                 if(showAll){
                     if(!game.isEnd())
-                    gameBoard.add(game);
+                    gameBoardList.add(game);
 
                 }else if(numPlayers >= game.getMinPlayers() && numPlayers <= game.getMaxPlayers()
                         && game.getPlayTime() >= min && game.getPlayTime() <= max  ) {
-                    gameBoard.add(game);
+                    gameBoardList.add(game);
                 }else{
                     Log.i("Game","Doesn't meet Requirements "+game.getName()+" "+game.getMinPlayers()+" "+game.getMaxPlayers()+" "+game.getPlayTime());
                 }
@@ -94,14 +92,14 @@ public class ResultFragment extends Fragment {
 
     private void sortList(){
         if(sort == 1){
-            Collections.sort(gameBoard, new Comparator<BoardGame>() {
+            Collections.sort(gameBoardList, new Comparator<BoardGame>() {
                 @Override
                 public int compare(BoardGame game1, BoardGame game2) {
                     return game1.getName().compareTo(game2.getName());
                 }
             });
         } else  if(sort == 2){
-            Collections.sort(gameBoard, new Comparator<BoardGame>() {
+            Collections.sort(gameBoardList, new Comparator<BoardGame>() {
                 @Override
                 public int compare(BoardGame game1, BoardGame game2) {
                     return game2.getName().compareTo(game1.getName());
@@ -118,12 +116,12 @@ class ResultsListAdapter extends BaseAdapter{
 
     @Override
     public int getCount() {
-        return gameBoard.size();
+        return gameBoardList.size();
     }
 
     @Override
     public Object getItem(int i) {
-        return gameBoard.get(i);
+        return gameBoardList.get(i);
     }
 
     @Override
@@ -136,13 +134,13 @@ class ResultsListAdapter extends BaseAdapter{
         TextView text = new TextView(getActivity());
         text.setPadding(0, 16, 0, 16);
         text.setTextSize(24);
-        text.setText(gameBoard.get(i).getName());
-        if(!gameBoard.get(i).isEnd())
+        text.setText(gameBoardList.get(i).getName());
+        if(!gameBoardList.get(i).isEnd())
         text.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 DescriptionFragment desc = new DescriptionFragment();
-                desc.setBoardGame(gameBoard.get(i));
+                desc.setBoardGame(gameBoardList.get(i));
                 getFragmentManager().beginTransaction().replace(R.id.content_main, desc).addToBackStack(null).commit();
             }
         });

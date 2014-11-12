@@ -7,71 +7,84 @@
     android:layout_marginRight="@dimen/activity_horizontal_margin"
     android:layout_height="match_parent">
 
-    <TextView
+    <EditText
         android:id="@+id/game_title"
-        android:layout_gravity="center_horizontal"
-        android:layout_width="wrap_content"
+        android:gravity="center_horizontal"
+        android:layout_width="fill_parent"
         android:layout_height="wrap_content"
-        android:textSize="@dimen/large_text"/>
+        android:textSize="@dimen/large_text"
+        android:inputType="textCapWords" />
 
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="1px"
         android:background="@color/line" />
 
-    <TextView
+    <EditText
         android:id="@+id/min_players"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:textSize="@dimen/medium_text"/>
+        android:textSize="@dimen/medium_text"
+        android:inputType="textCapWords" />
 
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="1px"
         android:background="@color/line" />
 
-    <TextView
+    <EditText
         android:id="@+id/max_players"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:textSize="@dimen/medium_text"/>
+        android:textSize="@dimen/medium_text"
+        android:inputType="textCapWords" />
 
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="1px"
         android:background="@color/line" />
 
-    <TextView
+    <EditText
         android:id="@+id/game_length"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:textSize="@dimen/medium_text"/>
+        android:textSize="@dimen/medium_text"
+        android:inputType="textCapWords" />
 
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="1px"
         android:background="@color/line" />
 
-    <TextView
+    <EditText
         android:id="@+id/game_description"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:textSize="@dimen/medium_text"/>
+        android:textSize="@dimen/medium_text"
+        android:inputType="textCapWords" />
 
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="1px"
         android:background="@color/line" />
 
-    <TextView
+    <EditText
         android:id="@+id/game_notes"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:textSize="@dimen/medium_text"/>
+        android:textSize="@dimen/medium_text"
+        android:inputType="textCapWords" />
 
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="1px"
         android:background="@color/line" />
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Back"
+        android:id="@+id/back_butt"
+        android:layout_gravity="center_horizontal" />
 
 </LinearLayout>
