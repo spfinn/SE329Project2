@@ -40,20 +40,26 @@ public class ResultFragment extends Fragment {
         setHasOptionsMenu(true);
 
         gameBoardList = new ArrayList<BoardGame>();
-        numPlayers = getArguments().getInt("numPlayers");
-        min = getArguments().getInt("min");
-        max = getArguments().getInt("max");
-        showAll = getArguments().getBoolean("all");
+        fillArguments();
 
         adapter = new ResultsListAdapter();
         list.setAdapter(adapter);
 
-        xmlParse();
+        pullXMLData();
 
         return view;
     }
 
-    private void xmlParse(){
+    private void fillArguments(){
+
+        numPlayers = getArguments().getInt("numPlayers");
+        min = getArguments().getInt("min");
+        max = getArguments().getInt("max");
+        showAll = getArguments().getBoolean("all");
+    }
+
+
+    private void pullXMLData(){
         new XMLPullingUtil(getActivity(), new OnItemParsedListener() {
             @Override
             public void itemParsed(BoardGame game) {
@@ -70,13 +76,12 @@ public class ResultFragment extends Fragment {
                 }else if(numPlayers >= game.getMinPlayers() && numPlayers <= game.getMaxPlayers()
                         && game.getPlayTime() >= min && game.getPlayTime() <= max  ) {
                     gameBoardList.add(game);
-                }else{
-                    Log.i("Game","Doesn't meet Requirements "+game.getName()+" "+game.getMinPlayers()+" "+game.getMaxPlayers()+" "+game.getPlayTime());
                 }
                 adapter.notifyDataSetChanged();
             }
         });
     }
+
 
     @Override
     public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {

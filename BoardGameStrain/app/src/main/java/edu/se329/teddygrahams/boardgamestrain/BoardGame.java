@@ -85,25 +85,3 @@ public class BoardGame {
         this.notes = notes;
     }
 }
-
-//<item objecttype="thing" objectid="7865" subtype="boardgame" collid="1108162">
-//<name sortindex="1">10 Days in Africa</name>
-//<yearpublished>2003</yearpublished>
-//<image>http://cf.geekdo-images.com/images/pic1229634.jpg</image>
-//<thumbnail>
-//http://cf.geekdo-images.com/images/pic1229634_t.jpg
-//</thumbnail>
-//<stats minplayers="2" maxplayers="4" playingtime="25" numowned="1707">
-//<rating value="8">
-//<usersrated value="1524"/>
-//<average value="6.57129"/>
-//<bayesaverage value="6.25256"/>
-//<stddev value="1.17318"/>
-//<median value="0"/>
-//</rating>
-//</stats>
-//<status own="1" prevowned="0" fortrade="0" want="0" wanttoplay="0" wanttobuy="0" wishlist="0" preordered="0" lastmodified="2007-10-12 22:51:58"/>
-//<numplays>20</numplays>
-//<comment>
-//Light filler and as a nice side effect you learn some African geography.
-//</comment>
