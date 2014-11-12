@@ -18,14 +18,28 @@ import java.util.ArrayList;
  * starting point of the program. This hosts the area for querying and would pass on requirements for board games.
  */
 public class MainFragment extends Fragment {
+    private ArrayList<Integer> numPlayers = new ArrayList<Integer>();
+    private ArrayList<Integer> gameLength = new ArrayList<Integer>();
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_main, null, false);
-
+        createSpinnerData();
         setAdapters(view);
-
         return view;
+    }
+
+    private void createSpinnerData() {
+        numPlayers = new ArrayList<Integer>();
+        gameLength = new ArrayList<Integer>();
+
+        for (int i = 1; i < 400; i++)
+            numPlayers.add(i);
+
+
+        for (int i = 0; i <= 1000; i = i + 30)
+            gameLength.add(i);
+
     }
 
     /**
@@ -36,31 +50,20 @@ public class MainFragment extends Fragment {
         final Spinner numPlayersView = (Spinner) view.findViewById(R.id.playersSpinner);
         final Spinner min = (Spinner) view.findViewById(R.id.minLengthOfGame);
         final Spinner max = (Spinner) view.findViewById(R.id.maxLengthOfGame);
-        Button findGame = (Button) view.findViewById(R.id.submit_button);
-        Button showAll = (Button) view.findViewById(R.id.show_all_button);
-
-        final ArrayList<Integer> numPlayers = new ArrayList<Integer>();
-        for (int i = 1; i < 11; i++)
-            numPlayers.add(i);
-
-        ArrayList<Integer> gameLength = new ArrayList<Integer>();
-        for (int i = 0; i <= 360; i = i + 30)
-            gameLength.add(i);
 
         numPlayersView.setAdapter(new myIntegerAdapter(numPlayers));
         min.setAdapter(new myIntegerAdapter(gameLength));
         max.setAdapter(new myIntegerAdapter(gameLength));
 
-        findGame.setOnClickListener(new View.OnClickListener() {
+        ((Button) view.findViewById(R.id.submit_button)).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
 
-                if(((Integer) min.getSelectedItem())> ((Integer) max.getSelectedItem()))
-                {
-                    Toast.makeText(getActivity(),"Game Length Not Possible",Toast.LENGTH_SHORT).show();
+                if (((Integer) min.getSelectedItem()) > ((Integer) max.getSelectedItem())) {
+                    Toast.makeText(getActivity(), "Game Length Not Possible", Toast.LENGTH_SHORT).show();
                     return;
                 }
-                FragmentTransaction transact =  getActivity().getFragmentManager().beginTransaction();
+                FragmentTransaction transact = getActivity().getFragmentManager().beginTransaction();
                 ResultFragment fragment = new ResultFragment();
                 Bundle bundle = new Bundle();
 
@@ -69,29 +72,24 @@ public class MainFragment extends Fragment {
                 bundle.putInt("max", ((Integer) max.getSelectedItem()));
                 bundle.putBoolean("all", false);
                 fragment.setArguments(bundle);
-                transact.replace(R.id.content_main, fragment);
-                transact.addToBackStack(null);
-                transact.commit();
-
+                transact.replace(R.id.content_main, fragment).addToBackStack(null).commit();
             }
         });
 
-        showAll.setOnClickListener(new View.OnClickListener() {
+        ((Button) view.findViewById(R.id.show_all_button)).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
 
-                FragmentTransaction transact =  getActivity().getFragmentManager().beginTransaction();
+                FragmentTransaction transact = getActivity().getFragmentManager().beginTransaction();
                 ResultFragment fragment = new ResultFragment();
                 Bundle bundle = new Bundle();
-                bundle.putInt("numPlayers", 0);
+                bundle.putInt("numPlayers", 0);//don't think these need to be set
                 bundle.putInt("min", 0);
                 bundle.putInt("max", 0);
                 bundle.putBoolean("all", true);
                 fragment.setArguments(bundle);
 
-                transact.replace(R.id.content_main, fragment);
-                transact.addToBackStack(null);
-                transact.commit();
+                transact.replace(R.id.content_main, fragment).addToBackStack(null).commit();
             }
         });
     }

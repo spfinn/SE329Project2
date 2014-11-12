@@ -40,39 +40,49 @@ public class ResultFragment extends Fragment {
         setHasOptionsMenu(true);
 
         gameBoardList = new ArrayList<BoardGame>();
+        fillArguments();
+
+        adapter = new ResultsListAdapter();
+        list.setAdapter(adapter);
+
+        pullXMLData();
+
+        return view;
+    }
+
+    private void fillArguments(){
+
         numPlayers = getArguments().getInt("numPlayers");
         min = getArguments().getInt("min");
         max = getArguments().getInt("max");
         showAll = getArguments().getBoolean("all");
 
-        adapter = new ResultsListAdapter();
-        list.setAdapter(adapter);
+    }
 
+
+    private void pullXMLData(){
         new XMLPullingUtil(getActivity(), new OnItemParsedListener() {
             @Override
             public void itemParsed(BoardGame game) {
                 if(game.isEnd() && gameBoardList.size()==0) {
-                        gameBoardList.add(game);
-                        adapter.notifyDataSetChanged();
-                        return;
+                    gameBoardList.add(game);
+                    adapter.notifyDataSetChanged();
+                    return;
                 }
                 //Checks to see if a game meets requirements.
                 if(showAll){
                     if(!game.isEnd())
-                    gameBoardList.add(game);
+                        gameBoardList.add(game);
 
                 }else if(numPlayers >= game.getMinPlayers() && numPlayers <= game.getMaxPlayers()
                         && game.getPlayTime() >= min && game.getPlayTime() <= max  ) {
                     gameBoardList.add(game);
-                }else{
-                    Log.i("Game","Doesn't meet Requirements "+game.getName()+" "+game.getMinPlayers()+" "+game.getMaxPlayers()+" "+game.getPlayTime());
                 }
                 adapter.notifyDataSetChanged();
             }
         });
-
-        return view;
     }
+
 
     @Override
     public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
