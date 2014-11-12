@@ -1,0 +1,102 @@
+{
+  "all_games": {
+    "games": [
+      {
+        "title": "The Settlers of Catan",
+        "minplayers": "3",
+        "maxplayers": "4",
+        "length": "90"
+      },
+      {
+        "title": "Risk",
+        "minplayers": "2",
+        "maxplayers": "6",
+        "length": "120"
+      },
+      {
+        "title": "7 Wonders",
+        "minplayers": "2",
+        "maxplayers": "7",
+        "length": "30"
+      },
+      {
+        "title": "Twilight Imperium (Third Edition)",
+        "minplayers": "3",
+        "maxplayers": "6",
+        "length": "360"
+      },
+      {
+        "title": "Ticket to Ride",
+        "minplayers": "3",
+        "maxplayers": "5",
+        "length": "45"
+      },
+      {
+        "title": "Small Word",
+        "minplayers": "2",
+        "maxplayers": "5",
+        "length": "80"
+      },
+      {
+        "title": "The Resistance",
+        "minplayers": "5",
+        "maxplayers": "10",
+        "length": "30"
+      },
+      {
+        "title": "Battlestar Galactica",
+        "minplayers": "3",
+        "maxplayers": "6",
+        "length": "180"
+      },
+      {
+        "title": "Eight Minute Empire",
+        "minplayers": "2",
+        "maxplayers": "5",
+        "length": "8"
+      },
+      {
+        "title": "Star Wars: X-Wing Miniatures Game",
+        "minplayers": "2",
+        "maxplayers": "2",
+        "length": "30"
+      },
+      {
+        "title": "Imperial Settlers",
+        "minplayers": "1",
+        "maxplayers": "4",
+        "length": "60"
+      },
+      {
+        "title": "Legendary: A Marvel Deck Building Game",
+        "minplayers": "1",
+        "maxplayers": "5",
+        "length": "45"
+      },
+      {
+        "title": "Twilight Struggle",
+        "minplayers": "2",
+        "maxplayers": "2",
+        "length": "180"
+      },
+      {
+        "title": "Robinson Crusoe: Adventure on the Cursed Island",
+        "minplayers": "1",
+        "maxplayers": "4",
+        "length": "120"
+      },
+      {
+        "title": "Dominion",
+        "minplayers": "2",
+        "maxplayers": "40",
+        "length": "30"
+      },
+      {
+        "title": "Pandemic",
+        "minplayers": "2",
+        "maxplayers": "4",
+        "length": "45"
+      }
+    ]
+  }
+}

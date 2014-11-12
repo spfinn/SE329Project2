@@ -48,18 +48,24 @@ public class ResultFragment extends Fragment {
         adapter = new ResultsListAdapter();
         list.setAdapter(adapter);
 
+        xmlParse();
+
+        return view;
+    }
+
+    private void xmlParse(){
         new XMLPullingUtil(getActivity(), new OnItemParsedListener() {
             @Override
             public void itemParsed(BoardGame game) {
                 if(game.isEnd() && gameBoardList.size()==0) {
-                        gameBoardList.add(game);
-                        adapter.notifyDataSetChanged();
-                        return;
+                    gameBoardList.add(game);
+                    adapter.notifyDataSetChanged();
+                    return;
                 }
                 //Checks to see if a game meets requirements.
                 if(showAll){
                     if(!game.isEnd())
-                    gameBoardList.add(game);
+                        gameBoardList.add(game);
 
                 }else if(numPlayers >= game.getMinPlayers() && numPlayers <= game.getMaxPlayers()
                         && game.getPlayTime() >= min && game.getPlayTime() <= max  ) {
@@ -70,8 +76,6 @@ public class ResultFragment extends Fragment {
                 adapter.notifyDataSetChanged();
             }
         });
-
-        return view;
     }
 
     @Override
