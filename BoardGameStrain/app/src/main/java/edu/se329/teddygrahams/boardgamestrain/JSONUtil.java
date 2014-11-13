@@ -3,13 +3,10 @@ package edu.se329.teddygrahams.boardgamestrain;
 import android.content.Context;
 import android.content.res.AssetManager;
 import android.util.Log;
-import android.util.Xml;
 
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
-import org.xmlpull.v1.XmlPullParser;
-import org.xmlpull.v1.XmlPullParserException;
 
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
@@ -18,6 +15,10 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.util.ArrayList;
 
+/**
+ * Carries out JSON operations including file read/write,
+ * object creation from JSON data, and JSON data creation from objects.
+ */
 public class JSONUtil {
 
     static Context cntxt;
@@ -26,6 +27,11 @@ public class JSONUtil {
         cntxt = context;
     }
 
+    /**
+     * Reads a JSON file from hidden internal memory folder for the app.
+     * @param filename The file to read.
+     * @return The JSON object read from the file.
+     */
     public static JSONObject readFromFile(String filename){
         String jsonText = null;
         JSONObject jObj = null;
@@ -53,6 +59,12 @@ public class JSONUtil {
         return jObj;
     }
 
+    /**
+     * Writes a JSONObject to file.
+     * @param filename Desired file name.
+     * @param fullDataObj The JSONObject to write to file.
+     * @return
+     */
     public static boolean saveToFile(String filename, JSONObject fullDataObj) {
         try {
             FileOutputStream fos = cntxt.openFileOutput(filename, Context.MODE_PRIVATE);
@@ -66,6 +78,11 @@ public class JSONUtil {
         return true;
     }
 
+    /**
+     * Reads a JSON file from assets folder.
+     * @param filename The file to read.
+     * @return The JSON object read from the file.
+     */
     public JSONObject readFromAssets(String filename){
 
         String jsonText = null;
@@ -94,8 +111,15 @@ public class JSONUtil {
         return jObj;
     }
 
+    /**
+     * Parses JSON and creates BoardGame objects.
+     * @param gamesArray JSONArray to parse.
+     * @return A list of BoardGame objects converted from JSONArray parameter.
+     */
     public ArrayList<BoardGame> jsonArrayToGamesList(JSONArray gamesArray){
         ArrayList<BoardGame> gamesToAdd = new ArrayList<BoardGame>();
+
+        // TODO - Any additional BoardGame attributes added later need added below.
         String title = "";
         int min = 0;
         int max = 0;
@@ -114,30 +138,37 @@ public class JSONUtil {
                 aGame = gamesArray.getJSONObject(i);
             } catch (JSONException e) {e.printStackTrace();continue;}
 
+            // get the JSON attribute.
             try {title = aGame.getString("title");}catch (JSONException e) {e.printStackTrace();}
             try {min = aGame.getInt("minplayers");}catch (JSONException e) {e.printStackTrace();}
             try {max = aGame.getInt("maxplayers");}catch (JSONException e) {e.printStackTrace();}
             try {length = aGame.getInt("length");}catch (JSONException e) {e.printStackTrace();}
             try {rating = aGame.getInt("rating");}catch (JSONException e) {e.printStackTrace();}
+            //Additional BoardGame attributes can be added above this line.
 
+            // Below is for debugging.
             try {String notFound = aGame.getString("Never_Found");}
             catch (JSONException e) {
-                Log.i("Game Parser","Found: " + title);
+                Log.i("Game Parser","Done Parsing: " + title);
             }
 
+            // create a BoardGame obj from newly parsed variables and add to list.
             gamesToAdd.add(new BoardGame(title, min, max, length, rating));
         }
         return gamesToAdd;
     }
 
+    /**
+     * Encodes a list of BoardGame objects to JSON data.
+     * @param games
+     * @return
+     */
     public JSONObject convertGamesListToJsonObject(ArrayList<BoardGame> games) {
         JSONObject toReturn = new JSONObject();
-
-        String filename = "all_games";
-
         JSONArray array = new JSONArray();
         JSONObject aGameObj = null;
         try {
+            // for each BoardGame object, encode a JSONObject with the attributes.
             for(int i = 0 ; i < games.size(); i ++)
             {
                 BoardGame aGame = games.get(i);
@@ -148,18 +179,16 @@ public class JSONUtil {
                 aGameObj.put("minplayers", aGame.getMinPlayers());
                 aGameObj.put("maxplayers", aGame.getMaxPlayers());
                 aGameObj.put("length", aGame.getPlayTime());
+                //Additional BoardGame attributes can be added above this line.
 
-
-
-                array.put(i, aGameObj);
+                array.put(i, aGameObj);// place JSONObject into JSONArray.
             }
 
+            // Place JSONArray into final JSONObject
             toReturn.put("all_games", array);
-
         } catch (JSONException e) {
             e.printStackTrace();
         }
-
         return toReturn;
     }
 }
