@@ -23,7 +23,6 @@ public class AddGameFragment extends Fragment {
             rootView = inflater.inflate(R.layout.fragment_description, container, false);
 
             Button back = (Button) rootView.findViewById(R.id.back_butt);
-            back.setText("Cancel");
             back.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
