@@ -18,6 +18,9 @@ import java.util.ArrayList;
  * starting point of the program. This hosts the area for querying and would pass on requirements for board games.
  */
 public class MainFragment extends Fragment {
+
+    ArrayList<BoardGame> allGamesList = new ArrayList<BoardGame>();
+
     private ArrayList<Integer> numPlayers = new ArrayList<Integer>();
     private ArrayList<Integer> gameLength = new ArrayList<Integer>();
 

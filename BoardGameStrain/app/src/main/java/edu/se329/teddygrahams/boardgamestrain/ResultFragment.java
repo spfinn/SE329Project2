@@ -14,6 +14,10 @@ import android.widget.BaseAdapter;
 import android.widget.ListView;
 import android.widget.TextView;
 
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
+
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
@@ -30,12 +34,14 @@ public class ResultFragment extends Fragment {
     private ArrayList<BoardGame> gameBoardList;
     private ResultsListAdapter adapter;
 
+    View rootView;
+
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
 
-        View view = inflater.inflate(R.layout.fragment_result, container, false);
-        final ListView list = (ListView) view.findViewById(R.id.result_view);
+        rootView = inflater.inflate(R.layout.fragment_result, container, false);
+        final ListView list = (ListView) rootView.findViewById(R.id.result_view);
 
         setHasOptionsMenu(true);
 
@@ -45,9 +51,9 @@ public class ResultFragment extends Fragment {
         adapter = new ResultsListAdapter();
         list.setAdapter(adapter);
 
-        pullXMLData();
+        //pullXMLData();
 
-        return view;
+        return rootView;
     }
 
     private void fillArguments(){
@@ -81,7 +87,6 @@ public class ResultFragment extends Fragment {
             }
         });
     }
-
 
     @Override
     public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {

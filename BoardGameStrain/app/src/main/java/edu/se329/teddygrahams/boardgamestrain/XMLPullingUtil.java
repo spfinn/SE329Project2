@@ -32,7 +32,6 @@ public class XMLPullingUtil {
             protected Integer doInBackground(String... params) {
                 try {
                     AssetManager assetManager = context.getAssets();
-
                     InputStream str =  assetManager.open("games.xml");
                     XmlPullParser parser = Xml.newPullParser();
                     parser.setFeature(XmlPullParser.FEATURE_PROCESS_NAMESPACES, false);
@@ -96,7 +95,7 @@ public class XMLPullingUtil {
     }
 
 
-    private BoardGame readEntry(XmlPullParser parser) throws XmlPullParserException, IOException {
+    public BoardGame readEntry(XmlPullParser parser) throws XmlPullParserException, IOException {
         parser.require(XmlPullParser.START_TAG, ns, "game");
         String title = null;
         int min = 0;
