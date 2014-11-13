@@ -8,7 +8,10 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.CheckBox;
 import android.widget.EditText;
+
+import org.json.JSONObject;
 
 /**
  * Created by Ben on 11/12/2014.
@@ -43,19 +46,35 @@ public class AddGameFragment extends Fragment {
         }
 
         private void saveGameInfo(){
-            EditText title = (EditText) rootView.findViewById(R.id.game_title);
-            EditText minPlayers = (EditText) rootView.findViewById(R.id.min_players);
-            EditText maxPlayers = (EditText) rootView.findViewById(R.id.max_players);
-            EditText gameLength = (EditText) rootView.findViewById(R.id.game_length);
-            EditText gameDescription = (EditText) rootView.findViewById(R.id.game_description);
-            EditText gameNotes = (EditText) rootView.findViewById(R.id.game_notes);
 
+            EditText title = (EditText) rootView.findViewById(R.id.game_title);
             game = new BoardGame(title.getText().toString());
+
+            EditText minPlayers = (EditText) rootView.findViewById(R.id.min_players);
             game.setMinPlayers(!minPlayers.getText().toString().equals("") ? Integer.parseInt(minPlayers.getText().toString()): 0);
+
+            EditText maxPlayers = (EditText) rootView.findViewById(R.id.max_players);
             game.setMaxPlayers(!maxPlayers.getText().toString().equals("") ? Integer.parseInt(maxPlayers.getText().toString()): 1);
+
+            EditText gameLength = (EditText) rootView.findViewById(R.id.game_length);
             game.setPlayTime(!gameLength.getText().toString().equals("") ? Integer.parseInt(gameLength.getText().toString()) : 30);
-            game.setNotes(gameNotes.getText().toString());
+
+            EditText rating = (EditText) rootView.findViewById(R.id.rating);
+            game.setRatingValue(Integer.parseInt(rating.getText().toString()));
+
+            EditText gameDescription = (EditText) rootView.findViewById(R.id.game_description);
             game.setDescription(gameDescription.getText().toString());
+
+            EditText gameNotes = (EditText) rootView.findViewById(R.id.game_notes);
+            game.setNotes(gameNotes.getText().toString());
+
+            CheckBox favorite = (CheckBox) rootView.findViewById(R.id.game_checkbox);
+            game.setFavorite(favorite.isChecked());
             MainActivity.allGamesList.add(game);
+
+            JSONUtil jUtil = new JSONUtil(getActivity());
+            JSONObject jObj = jUtil.convertGamesListToJsonObject(MainActivity.allGamesList);
+            jUtil.saveToFile("all_games", jObj);
+
         }
 }

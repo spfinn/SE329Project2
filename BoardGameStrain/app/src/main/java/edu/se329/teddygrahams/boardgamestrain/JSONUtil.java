@@ -148,11 +148,11 @@ public class JSONUtil {
             try {min = aGame.getInt("minplayers");}catch (JSONException e) {e.printStackTrace();}
             try {max = aGame.getInt("maxplayers");}catch (JSONException e) {e.printStackTrace();}
             try {length = aGame.getInt("length");}catch (JSONException e) {e.printStackTrace();}
-            try {rating = aGame.getInt("rating");}catch (JSONException e) {e.printStackTrace();}
+            try {rating = aGame.getInt("rating");}catch (JSONException e) {}
             //Additional BoardGame attributes can be added above this line.
-            try {notes = aGame.getString("notes");}catch (JSONException e) {e.printStackTrace();}
-            try {desc = aGame.getString("desc");}catch (JSONException e) {e.printStackTrace();}
-            try {favorite = aGame.getBoolean("favorite");}catch (JSONException e) {e.printStackTrace();}
+            try {notes = aGame.getString("notes");}catch (JSONException e) {}
+            try {desc = aGame.getString("desc");}catch (JSONException e) {}
+            try {favorite = aGame.getBoolean("favorite");}catch (JSONException e) {}
 
             // Below is for debugging.
             try {String notFound = aGame.getString("Never_Found");}

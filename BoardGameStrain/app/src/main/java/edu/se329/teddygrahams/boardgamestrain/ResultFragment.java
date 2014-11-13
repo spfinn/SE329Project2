@@ -13,6 +13,8 @@ import android.widget.BaseAdapter;
 import android.widget.ListView;
 import android.widget.TextView;
 
+import org.json.JSONObject;
+
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
@@ -52,6 +54,12 @@ public class ResultFragment extends Fragment {
         return rootView;
     }
 
+    @Override
+    public void onResume() {
+        writeAllGamesListToFile();
+        super.onResume();
+    }
+
     private void fillArguments(){
 
         numPlayers = getArguments().getInt("numPlayers");
@@ -60,9 +68,6 @@ public class ResultFragment extends Fragment {
         showAll = getArguments().getBoolean("all", false);
         showFavorites = getArguments().getBoolean("favorite",false);
     }
-
-
-
 
     public void buildFilteredList(){
         ArrayList<BoardGame> allGames = MainActivity.allGamesList;
@@ -119,6 +124,12 @@ public class ResultFragment extends Fragment {
             });
         }
         adapter.notifyDataSetChanged();
+    }
+
+    public void writeAllGamesListToFile(){
+        JSONUtil jUtil = new JSONUtil(getActivity());
+        JSONObject jObj = jUtil.convertGamesListToJsonObject(resultGamesList);
+        jUtil.saveToFile("all_games", jObj);
     }
 
     /**
