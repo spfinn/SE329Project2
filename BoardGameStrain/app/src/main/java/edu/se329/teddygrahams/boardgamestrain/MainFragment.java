@@ -70,7 +70,6 @@ public class MainFragment extends Fragment {
                 bundle.putInt("numPlayers", ((Integer) numPlayersView.getSelectedItem()));
                 bundle.putInt("min", ((Integer) min.getSelectedItem()));
                 bundle.putInt("max", ((Integer) max.getSelectedItem()));
-                bundle.putBoolean("all", false);
                 fragment.setArguments(bundle);
                 transact.replace(R.id.content_main, fragment).addToBackStack(null).commit();
             }
@@ -83,10 +82,21 @@ public class MainFragment extends Fragment {
                 FragmentTransaction transact = getActivity().getFragmentManager().beginTransaction();
                 ResultFragment fragment = new ResultFragment();
                 Bundle bundle = new Bundle();
-                bundle.putInt("numPlayers", 0);//don't think these need to be set
-                bundle.putInt("min", 0);
-                bundle.putInt("max", 0);
                 bundle.putBoolean("all", true);
+                fragment.setArguments(bundle);
+
+                transact.replace(R.id.content_main, fragment).addToBackStack(null).commit();
+            }
+        });
+
+        ((Button) view.findViewById(R.id.show_favorites_button)).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+                FragmentTransaction transact = getActivity().getFragmentManager().beginTransaction();
+                ResultFragment fragment = new ResultFragment();
+                Bundle bundle = new Bundle();
+                bundle.putBoolean("favorite",true);
                 fragment.setArguments(bundle);
 
                 transact.replace(R.id.content_main, fragment).addToBackStack(null).commit();

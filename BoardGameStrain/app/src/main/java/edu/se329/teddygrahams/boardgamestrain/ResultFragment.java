@@ -26,6 +26,7 @@ public class ResultFragment extends Fragment {
     private int min;
     private int max;
     private boolean showAll;
+    private boolean showFavorites;
     private int sort = 2;
     private ArrayList<BoardGame> gameBoardList;
     private ResultsListAdapter adapter;
@@ -53,9 +54,10 @@ public class ResultFragment extends Fragment {
     private void fillArguments(){
 
         numPlayers = getArguments().getInt("numPlayers");
-        min = getArguments().getInt("min");
-        max = getArguments().getInt("max");
-        showAll = getArguments().getBoolean("all");
+        min = getArguments().getInt("min",0);
+        max = getArguments().getInt("max",1);
+        showAll = getArguments().getBoolean("all",false);
+        showFavorites = getArguments().getBoolean("favorite",false);
     }
 
 

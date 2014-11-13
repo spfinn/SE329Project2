@@ -14,6 +14,7 @@ public class BoardGame {
     private String desc;
     private String notes;
     private boolean end = false;
+    private boolean favorite = false;
 
     public BoardGame (String name){
         this.name = name;
@@ -92,5 +93,13 @@ public class BoardGame {
 
     public void setDescription(String desc) {
         this.desc = desc;
+    }
+
+    public boolean isFavorite() {
+        return favorite;
+    }
+
+    public void setFavorite(boolean favorite) {
+        this.favorite = favorite;
     }
 }
