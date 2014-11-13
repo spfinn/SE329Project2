@@ -131,7 +131,7 @@ public class ResultFragment extends Fragment {
 
     public void writeAllGamesListToFile(){
         JSONUtil jUtil = new JSONUtil(getActivity());
-        JSONObject jObj = jUtil.convertGamesListToJsonObject(resultGamesList);
+        JSONObject jObj = jUtil.convertGamesListToJsonObject(MainActivity.allGamesList);
         jUtil.saveToFile("all_games", jObj);
     }
 
