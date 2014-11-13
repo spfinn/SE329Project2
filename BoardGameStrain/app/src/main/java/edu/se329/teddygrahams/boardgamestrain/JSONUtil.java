@@ -103,22 +103,28 @@ public class JSONUtil {
         int rating = 0;
 
         for(int i=0; i<gamesArray.length(); i++){
-            try {
-                JSONObject aGame = gamesArray.getJSONObject(i);
-                title = "";
-                min = 0;
-                max = 0;
-                length = 0;
-                rating = 0;
-                title = aGame.getString("title");
-                min = aGame.getInt("minplayers");
-                max = aGame.getInt("maxplayers");
-                length = aGame.getInt("length");
-                rating = aGame.getInt("rating");
+            title = "";
+            min = 0;
+            max = 0;
+            length = 0;
+            rating = 0;
 
-            } catch (JSONException e) {
-                e.printStackTrace();
+            JSONObject aGame = null;
+            try {
+                aGame = gamesArray.getJSONObject(i);
+            } catch (JSONException e) {e.printStackTrace();continue;}
+
+            try {title = aGame.getString("title");}catch (JSONException e) {e.printStackTrace();}
+            try {min = aGame.getInt("minplayers");}catch (JSONException e) {e.printStackTrace();}
+            try {max = aGame.getInt("maxplayers");}catch (JSONException e) {e.printStackTrace();}
+            try {length = aGame.getInt("length");}catch (JSONException e) {e.printStackTrace();}
+            try {rating = aGame.getInt("rating");}catch (JSONException e) {e.printStackTrace();}
+
+            try {String notFound = aGame.getString("Never_Found");}
+            catch (JSONException e) {
+                Log.i("Game Parser","Found: " + title);
             }
+
             gamesToAdd.add(new BoardGame(title, min, max, length, rating));
         }
         return gamesToAdd;
