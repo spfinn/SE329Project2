@@ -123,4 +123,37 @@ public class JSONUtil {
         }
         return gamesToAdd;
     }
+
+    public JSONObject convertGamesListToJsonObject(ArrayList<BoardGame> games) {
+        JSONObject toReturn = new JSONObject();
+
+        String filename = "all_games";
+
+        JSONArray array = new JSONArray();
+        JSONObject aGameObj = null;
+        try {
+            for(int i = 0 ; i < games.size(); i ++)
+            {
+                BoardGame aGame = games.get(i);
+
+                //TODO Here is where you place elements into JSONObject
+                aGameObj = new JSONObject();
+                aGameObj.put("title", aGame.getName());
+                aGameObj.put("minplayers", aGame.getMinPlayers());
+                aGameObj.put("maxplayers", aGame.getMaxPlayers());
+                aGameObj.put("length", aGame.getPlayTime());
+
+
+
+                array.put(i, aGameObj);
+            }
+
+            toReturn.put("all_games", array);
+
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+
+        return toReturn;
+    }
 }

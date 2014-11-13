@@ -71,4 +71,10 @@ public class MainActivity extends Activity {
         }
         Log.i("All Games List","allGamesList set with " +allGamesList.size()+" games...");
     }
+
+    public void writeAllGamesListToFile(){
+        JSONUtil jUtil = new JSONUtil(this);
+        JSONObject jObj = jUtil.convertGamesListToJsonObject(allGamesList);
+        jUtil.saveToFile("all_games", jObj);
+    }
 }
