@@ -77,4 +77,36 @@ public class MainActivity extends Activity {
         JSONObject jObj = jUtil.convertGamesListToJsonObject(allGamesList);
         jUtil.saveToFile("all_games", jObj);
     }
+
+    /**
+     * Converts allGamesList into JSON data and writes it to the server.
+     */
+    public void writeFileToServer(){
+        DBAccess dbAccess = new DBAccess();
+
+        JSONUtil jUtil = new JSONUtil(this);
+        JSONObject jObj = jUtil.convertGamesListToJsonObject(allGamesList);
+
+        dbAccess.writeToServer("all_games", jObj.toString());
+    }
+
+    /**
+     * Reads specified file from the server and converts it's contents to a list of
+     * BoardGame objects.
+     */
+    public void readFileFromServer(String filename){
+        DBAccess dbAccess = new DBAccess();
+        JSONUtil jUtil = new JSONUtil(this);
+
+        String fileContents = dbAccess.readFromServer(filename);
+
+        JSONObject jObj = null;
+        JSONArray gamesArray = null;
+        try {
+            jObj = new JSONObject(fileContents);
+            gamesArray = jObj.getJSONArray("all_games");
+        } catch (JSONException e) {e.printStackTrace();}
+
+        allGamesList = jUtil.jsonArrayToGamesList(gamesArray);
+    }
 }
