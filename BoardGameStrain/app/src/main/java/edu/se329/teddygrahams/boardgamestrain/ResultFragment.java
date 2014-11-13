@@ -3,7 +3,6 @@ package edu.se329.teddygrahams.boardgamestrain;
 import android.app.Fragment;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -13,10 +12,6 @@ import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.ListView;
 import android.widget.TextView;
-
-import org.json.JSONArray;
-import org.json.JSONException;
-import org.json.JSONObject;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -32,7 +27,7 @@ public class ResultFragment extends Fragment {
     private boolean showAll;
     private boolean showFavorites;
     private int sort = 2;
-    private ArrayList<BoardGame> gameBoardList;
+    private ArrayList<BoardGame> resultGamesList;
     private ResultsListAdapter adapter;
 
     View rootView;
@@ -46,13 +41,13 @@ public class ResultFragment extends Fragment {
 
         setHasOptionsMenu(true);
 
-        gameBoardList = new ArrayList<BoardGame>();
+        resultGamesList = new ArrayList<BoardGame>();
         fillArguments();
 
         adapter = new ResultsListAdapter();
         list.setAdapter(adapter);
 
-        //pullXMLData();
+        buildFilteredList();
 
         return rootView;
     }
@@ -62,32 +57,33 @@ public class ResultFragment extends Fragment {
         numPlayers = getArguments().getInt("numPlayers");
         min = getArguments().getInt("min",0);
         max = getArguments().getInt("max",1);
-        showAll = getArguments().getBoolean("all",false);
+        showAll = getArguments().getBoolean("all", false);
         showFavorites = getArguments().getBoolean("favorite",false);
     }
 
 
-    private void pullXMLData(){
-        new XMLPullingUtil(getActivity(), new OnItemParsedListener() {
-            @Override
-            public void itemParsed(BoardGame game) {
-                if(game.isEnd() && gameBoardList.size()==0) {
-                    gameBoardList.add(game);
-                    adapter.notifyDataSetChanged();
-                    return;
-                }
-                //Checks to see if a game meets requirements.
-                if(showAll){
-                    if(!game.isEnd())
-                        gameBoardList.add(game);
 
-                }else if(numPlayers >= game.getMinPlayers() && numPlayers <= game.getMaxPlayers()
-                        && game.getPlayTime() >= min && game.getPlayTime() <= max  ) {
-                    gameBoardList.add(game);
-                }
+
+    public void buildFilteredList(){
+        ArrayList<BoardGame> allGames = MainActivity.allGamesList;
+        for(int i=0; i < allGames.size();i++) {
+            BoardGame game = allGames.get(i);
+            if (game.isEnd() && resultGamesList.size() == 0) {
+                resultGamesList.add(game);
                 adapter.notifyDataSetChanged();
+                return;
             }
-        });
+            //Checks to see if a game meets requirements.
+            if (showAll) {
+                if (!game.isEnd())
+                    resultGamesList.add(game);
+
+            } else if (numPlayers >= game.getMinPlayers() && numPlayers <= game.getMaxPlayers()
+                    && game.getPlayTime() >= min && game.getPlayTime() <= max) {
+                resultGamesList.add(game);
+            }
+            adapter.notifyDataSetChanged();
+        }
     }
 
     @Override
@@ -108,14 +104,14 @@ public class ResultFragment extends Fragment {
 
     private void sortList(){
         if(sort == 1){
-            Collections.sort(gameBoardList, new Comparator<BoardGame>() {
+            Collections.sort(resultGamesList, new Comparator<BoardGame>() {
                 @Override
                 public int compare(BoardGame game1, BoardGame game2) {
                     return game1.getName().compareTo(game2.getName());
                 }
             });
         } else  if(sort == 2){
-            Collections.sort(gameBoardList, new Comparator<BoardGame>() {
+            Collections.sort(resultGamesList, new Comparator<BoardGame>() {
                 @Override
                 public int compare(BoardGame game1, BoardGame game2) {
                     return game2.getName().compareTo(game1.getName());
@@ -132,12 +128,12 @@ class ResultsListAdapter extends BaseAdapter{
 
     @Override
     public int getCount() {
-        return gameBoardList.size();
+        return resultGamesList.size();
     }
 
     @Override
     public Object getItem(int i) {
-        return gameBoardList.get(i);
+        return resultGamesList.get(i);
     }
 
     @Override
@@ -150,13 +146,13 @@ class ResultsListAdapter extends BaseAdapter{
         TextView text = new TextView(getActivity());
         text.setPadding(0, 16, 0, 16);
         text.setTextSize(24);
-        text.setText(gameBoardList.get(i).getName());
-        if(!gameBoardList.get(i).isEnd())
+        text.setText(resultGamesList.get(i).getName());
+        if(!resultGamesList.get(i).isEnd())
         text.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 DescriptionFragment desc = new DescriptionFragment();
-                desc.setBoardGame(gameBoardList.get(i));
+                desc.setBoardGame(resultGamesList.get(i));
                 getFragmentManager().beginTransaction().replace(R.id.content_main, desc).addToBackStack(null).commit();
             }
         });
