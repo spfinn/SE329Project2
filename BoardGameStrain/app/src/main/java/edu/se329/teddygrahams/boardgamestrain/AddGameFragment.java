@@ -51,9 +51,9 @@ public class AddGameFragment extends Fragment {
             EditText gameNotes = (EditText) rootView.findViewById(R.id.game_notes);
 
             game = new BoardGame(title.getText().toString());
-            game.setMinPlayers(Integer.parseInt(minPlayers.getText().toString()));
-            game.setMaxPlayers(Integer.parseInt(maxPlayers.getText().toString()));
-            game.setPlayTime(Integer.parseInt(gameLength.getText().toString()));
+            game.setMinPlayers(!minPlayers.getText().toString().equals("") ? Integer.parseInt(minPlayers.getText().toString()): 0);
+            game.setMaxPlayers(!maxPlayers.getText().toString().equals("") ? Integer.parseInt(maxPlayers.getText().toString()): 1);
+            game.setPlayTime(!gameLength.getText().toString().equals("") ? Integer.parseInt(gameLength.getText().toString()) : 30);
             game.setNotes(gameNotes.getText().toString());
             game.setDescription(gameDescription.getText().toString());
         }
