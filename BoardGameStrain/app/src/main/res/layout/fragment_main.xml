@@ -89,15 +89,25 @@
         android:layout_width="match_parent"
         android:layout_height="1px"
         android:background="@color/line" />
-
+<LinearLayout
+    android:layout_margin="@dimen/item_margin"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
     <Button
         android:id="@+id/show_all_button"
+        android:layout_weight="1"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_gravity="center_horizontal"
-        android:layout_margin="@dimen/item_margin"
         android:text="@string/showall"
         android:textSize="@dimen/medium_text"/>
 
+    <Button
+        android:id="@+id/show_favorites_button"
+        android:layout_weight="1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Show Favorites"
+        android:textSize="@dimen/medium_text"/>
 
+    </LinearLayout>
 </LinearLayout>
