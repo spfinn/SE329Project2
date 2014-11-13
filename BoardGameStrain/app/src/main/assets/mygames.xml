@@ -1,8 +1,0 @@
-<games>
-    <game>
-        <title>The Settlers of Catan</title>
-        <minplayers>3</minplayers>
-        <maxplayers>4</maxplayers>
-        <length>90</length>
-    </game>
-</games>
