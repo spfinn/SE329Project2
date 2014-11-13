@@ -54,12 +54,6 @@ public class ResultFragment extends Fragment {
         return rootView;
     }
 
-    @Override
-    public void onResume() {
-        writeAllGamesListToFile();
-        super.onResume();
-    }
-
     private void fillArguments(){
 
         numPlayers = getArguments().getInt("numPlayers");
@@ -127,12 +121,6 @@ public class ResultFragment extends Fragment {
             });
         }
         adapter.notifyDataSetChanged();
-    }
-
-    public void writeAllGamesListToFile(){
-        JSONUtil jUtil = new JSONUtil(getActivity());
-        JSONObject jObj = jUtil.convertGamesListToJsonObject(MainActivity.allGamesList);
-        jUtil.saveToFile("all_games", jObj);
     }
 
     /**

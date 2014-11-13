@@ -11,6 +11,8 @@ import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.EditText;
 
+import org.json.JSONObject;
+
 /**
  * Fragment used to show a basic description of a given boardgame.
  */
@@ -81,6 +83,8 @@ public class DescriptionFragment extends Fragment {
         game.setNotes(gameNotes.getText().toString());
         CheckBox favorite = (CheckBox) rootView.findViewById(R.id.game_checkbox);
         game.setFavorite(favorite.isChecked());
-
+        JSONUtil jUtil = new JSONUtil(getActivity());
+        JSONObject jObj = jUtil.convertGamesListToJsonObject(MainActivity.allGamesList);
+        jUtil.saveToFile("all_games", jObj);
     }
 }
