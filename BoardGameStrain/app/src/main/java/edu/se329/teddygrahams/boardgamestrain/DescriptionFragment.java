@@ -63,13 +63,6 @@ public class DescriptionFragment extends Fragment {
         this.game = game;
     }
 
-    @Override
-    public void onPause(){
-
-        saveGameInfo();
-        super.onPause();
-    }
-
     private void saveGameInfo(){
         //Grab new text field data and set the values for this game.
         EditText title = (EditText) rootView.findViewById(R.id.game_title);
