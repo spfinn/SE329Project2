@@ -8,6 +8,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -27,22 +28,8 @@ public class MainFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_main, null, false);
-        createSpinnerData();
         setAdapters(view);
         return view;
-    }
-
-    private void createSpinnerData() {
-        numPlayers = new ArrayList<Integer>();
-        gameLength = new ArrayList<Integer>();
-
-        for (int i = 1; i < 400; i++)
-            numPlayers.add(i);
-
-
-        for (int i = 0; i <= 1000; i = i + 30)
-            gameLength.add(i);
-
     }
 
     /**
@@ -50,19 +37,16 @@ public class MainFragment extends Fragment {
      * @param view
      */
     public void setAdapters(View view){
-        final Spinner numPlayersView = (Spinner) view.findViewById(R.id.playersSpinner);
-        final Spinner min = (Spinner) view.findViewById(R.id.minLengthOfGame);
-        final Spinner max = (Spinner) view.findViewById(R.id.maxLengthOfGame);
+        final EditText numPlayersView = (EditText) view.findViewById(R.id.playersSpinner);
+        final EditText min = (EditText) view.findViewById(R.id.minLengthOfGame);
+        final EditText max = (EditText) view.findViewById(R.id.maxLengthOfGame);
 
-        numPlayersView.setAdapter(new myIntegerAdapter(numPlayers));
-        min.setAdapter(new myIntegerAdapter(gameLength));
-        max.setAdapter(new myIntegerAdapter(gameLength));
 
         ((Button) view.findViewById(R.id.submit_button)).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
 
-                if (((Integer) min.getSelectedItem()) > ((Integer) max.getSelectedItem())) {
+                if (( Integer.parseInt(min.getText().toString())) > (Integer.parseInt(max.getText().toString()))) {
                     Toast.makeText(getActivity(), "Game Length Not Possible", Toast.LENGTH_SHORT).show();
                     return;
                 }
@@ -70,9 +54,9 @@ public class MainFragment extends Fragment {
                 ResultFragment fragment = new ResultFragment();
                 Bundle bundle = new Bundle();
 
-                bundle.putInt("numPlayers", ((Integer) numPlayersView.getSelectedItem()));
-                bundle.putInt("min", ((Integer) min.getSelectedItem()));
-                bundle.putInt("max", ((Integer) max.getSelectedItem()));
+                bundle.putInt("numPlayers", (Integer.parseInt(numPlayersView.getText().toString())));
+                bundle.putInt("min", (Integer.parseInt(min.getText().toString())));
+                bundle.putInt("max", (Integer.parseInt(max.getText().toString())));
                 fragment.setArguments(bundle);
                 transact.replace(R.id.content_main, fragment).addToBackStack(null).commit();
             }

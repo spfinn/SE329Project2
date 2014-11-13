@@ -23,11 +23,12 @@
             android:layout_height="wrap_content"
             android:text="@string/players"
             android:textSize="@dimen/medium_text" />
-        <Spinner
+        <EditText
             android:id="@+id/playersSpinner"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginLeft="@dimen/item_margin"></Spinner>
+            android:inputType="number"
+            android:layout_marginLeft="@dimen/item_margin"/>
     </LinearLayout>
 
     <RelativeLayout
@@ -46,10 +47,11 @@
             android:text="@string/lengthgame"
             android:textSize="@dimen/medium_text" />
 
-        <Spinner
+        <EditText
             android:id="@+id/minLengthOfGame"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:inputType="number"
             android:layout_marginLeft="@dimen/item_margin"/>
 
         <TextView
@@ -57,10 +59,11 @@
             android:layout_height="wrap_content"
             android:text=" - "
             android:textSize="@dimen/medium_text" />
-        <Spinner
+        <EditText
             android:id="@+id/maxLengthOfGame"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:inputType="number"
             android:layout_marginLeft="@dimen/item_margin"/>
 
         <TextView
