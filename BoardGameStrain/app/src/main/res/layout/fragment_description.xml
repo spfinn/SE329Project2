@@ -19,37 +19,65 @@
         android:layout_width="match_parent"
         android:layout_height="1px"
         android:background="@color/line" />
+<LinearLayout
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="horizontal">
 
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Min Players: "/>
     <EditText
         android:id="@+id/min_players"
-        android:layout_width="match_parent"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textSize="@dimen/medium_text"
-        android:inputType="textCapWords" />
+        android:inputType="number" />
+
+    </LinearLayout>
+
 
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="1px"
         android:background="@color/line" />
-
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Max Players: "/>
     <EditText
         android:id="@+id/max_players"
-        android:layout_width="match_parent"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textSize="@dimen/medium_text"
-        android:inputType="textCapWords" />
+        android:inputType="number" />
+    </LinearLayout>
 
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="1px"
         android:background="@color/line" />
-
-    <EditText
-        android:id="@+id/game_length"
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:textSize="@dimen/medium_text"
-        android:inputType="textCapWords" />
+        android:orientation="horizontal">
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Game Length (minutes): "/>
+            <EditText
+                android:id="@+id/game_length"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="@dimen/medium_text"
+                android:inputType="number" />
+        </LinearLayout>
+
 
     <RelativeLayout
         android:layout_width="match_parent"
@@ -87,4 +115,10 @@
         android:id="@+id/back_butt"
         android:layout_gravity="center_horizontal" />
 
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Save"
+        android:id="@+id/save_butt"
+        android:layout_gravity="center_horizontal" />
 </LinearLayout>

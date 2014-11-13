@@ -29,9 +29,9 @@ public class DescriptionFragment extends Fragment {
         EditText gameNotes = (EditText) rootView.findViewById(R.id.game_notes);
 
         title.setText(game.getName());
-        maxPlayers.setText("Maximum Player: " + game.getMaxPlayers());
-        minPlayers.setText("Minimum Player: " + game.getMinPlayers());
-        gameLength.setText("Length of Game: "+ game.getPlayTime()+" minutes");
+        maxPlayers.setText(game.getMaxPlayers()+"");
+        minPlayers.setText(game.getMinPlayers()+"");
+        gameLength.setText(game.getPlayTime()+"");
         gameNotes.setText(game.getNotes());
         gameDescription.setText("Not Available");
 
@@ -62,11 +62,11 @@ public class DescriptionFragment extends Fragment {
         EditText title = (EditText) rootView.findViewById(R.id.game_title);
         game.setName(""+title.getText());
         EditText minPlayers = (EditText) rootView.findViewById(R.id.min_players);
-        game.setMinPlayers(Integer.parseInt(minPlayers.getText().toString().substring(16)));
+        game.setMinPlayers(Integer.parseInt(minPlayers.getText().toString()));
         EditText maxPlayers = (EditText) rootView.findViewById(R.id.max_players);
-        game.setMaxPlayers(Integer.parseInt(maxPlayers.getText().toString().substring(16)));
+        game.setMaxPlayers(Integer.parseInt(maxPlayers.getText().toString()));
         EditText gameLength = (EditText) rootView.findViewById(R.id.game_length);
-        //game.setPlayTime(Integer.parseInt(gameLength.getText().toString().substring(16)));
+        game.setPlayTime(Integer.parseInt(gameLength.getText().toString()));
 
         EditText gameDescription = (EditText) rootView.findViewById(R.id.game_description);
         EditText gameNotes = (EditText) rootView.findViewById(R.id.game_notes);

@@ -31,8 +31,12 @@ public class MainActivity extends Activity {
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
-        if(item.getItemId() == R.id.find_more)
+        int id = item.getItemId();
+        if(id== R.id.find_more)
             getFragmentManager().beginTransaction().replace(R.id.content_main, new MainFragment()).commit();
+        else if(id == R.id.add_game){
+            getFragmentManager().beginTransaction().replace(R.id.content_main, new AddGameFragment()).addToBackStack(null).commit();
+        }
         return super.onOptionsItemSelected(item);
     }
 }

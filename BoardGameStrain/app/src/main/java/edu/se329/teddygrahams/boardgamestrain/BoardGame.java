@@ -11,6 +11,7 @@ public class BoardGame {
     private int maxPlayers;
     private int playTime;
     private int ratingValue;
+    private String desc;
     private String notes;
     private boolean end = false;
 
@@ -83,5 +84,13 @@ public class BoardGame {
 
     public void setNotes(String notes) {
         this.notes = notes;
+    }
+
+    public String getDescription() {
+        return desc;
+    }
+
+    public void setDescription(String desc) {
+        this.desc = desc;
     }
 }
