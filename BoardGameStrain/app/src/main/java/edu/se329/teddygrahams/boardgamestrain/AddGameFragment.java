@@ -56,5 +56,6 @@ public class AddGameFragment extends Fragment {
             game.setPlayTime(!gameLength.getText().toString().equals("") ? Integer.parseInt(gameLength.getText().toString()) : 30);
             game.setNotes(gameNotes.getText().toString());
             game.setDescription(gameDescription.getText().toString());
+            MainActivity.allGamesList.add(game);
         }
 }

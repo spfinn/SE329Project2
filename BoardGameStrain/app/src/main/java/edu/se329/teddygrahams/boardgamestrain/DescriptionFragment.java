@@ -35,6 +35,13 @@ public class DescriptionFragment extends Fragment {
         gameNotes.setText(game.getNotes());
         gameDescription.setText("Not Available");
 
+        Button save = (Button) rootView.findViewById(R.id.save_butt);
+        save.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                saveGameInfo();
+            }
+        });
         Button back = (Button) rootView.findViewById(R.id.back_butt);
         back.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -53,7 +60,6 @@ public class DescriptionFragment extends Fragment {
     public void onPause(){
 
         saveGameInfo();
-
         super.onPause();
     }
 
