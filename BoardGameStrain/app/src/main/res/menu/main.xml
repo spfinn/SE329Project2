@@ -1,14 +1,26 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
-    tools:context=".MainActivity" >
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <item
+        android:id="@+id/upload_butt"
+        android:icon="@drawable/ic_up_arrow"
+        android:title="Sync Inventory"
+        android:titleCondensed="Sync"
+        app:showAsAction="always"/>
+    <item
+        android:id="@+id/dload_butt"
+        android:icon="@drawable/ic_down_arrow"
+        android:title="Download Inventory"
+        android:titleCondensed="Load Inventory"
+        app:showAsAction="always"/>
+
     <item android:id="@+id/add_game"
         android:title="@string/add_game"
         android:orderInCategory="98"
-        app:showAsAction="ifRoom" />
+        app:showAsAction="never" />
     <item android:id="@+id/find_more"
         android:title="@string/find_more"
         android:orderInCategory="99"
-        app:showAsAction="ifRoom" />
+        app:showAsAction="never" />
 
 </menu>
