@@ -121,13 +121,18 @@ public class JSONUtil {
 
         // TODO - Any additional BoardGame attributes added later need added below.
         String title = "";
+        String notes = "";
+        String desc = "";
+        boolean favorite = false;
         int min = 0;
         int max = 0;
         int length = 0;
         int rating = 0;
-
         for(int i=0; i<gamesArray.length(); i++){
             title = "";
+            notes = "";
+            desc = "";
+            favorite=false;
             min = 0;
             max = 0;
             length = 0;
@@ -145,15 +150,22 @@ public class JSONUtil {
             try {length = aGame.getInt("length");}catch (JSONException e) {e.printStackTrace();}
             try {rating = aGame.getInt("rating");}catch (JSONException e) {e.printStackTrace();}
             //Additional BoardGame attributes can be added above this line.
+            try {notes = aGame.getString("notes");}catch (JSONException e) {e.printStackTrace();}
+            try {desc = aGame.getString("desc");}catch (JSONException e) {e.printStackTrace();}
+            try {favorite = aGame.getBoolean("favorite");}catch (JSONException e) {e.printStackTrace();}
 
             // Below is for debugging.
             try {String notFound = aGame.getString("Never_Found");}
             catch (JSONException e) {
                 Log.i("Game Parser","Done Parsing: " + title);
             }
+           BoardGame game = new BoardGame(title, min, max, length, rating);
+           game.setNotes(notes);
+           game.setDescription(desc);
+           game.setFavorite(favorite);
 
             // create a BoardGame obj from newly parsed variables and add to list.
-            gamesToAdd.add(new BoardGame(title, min, max, length, rating));
+            gamesToAdd.add(game);
         }
         return gamesToAdd;
     }
@@ -180,6 +192,10 @@ public class JSONUtil {
                 aGameObj.put("maxplayers", aGame.getMaxPlayers());
                 aGameObj.put("length", aGame.getPlayTime());
                 //Additional BoardGame attributes can be added above this line.
+                aGameObj.put("notes", aGame.getNotes());
+                aGameObj.put("desc", aGame.getDescription());
+                aGameObj.put("favorite", aGame.isFavorite());
+                aGameObj.put("rating", aGame.getRatingValue());
 
                 array.put(i, aGameObj);// place JSONObject into JSONArray.
             }

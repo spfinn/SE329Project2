@@ -102,4 +102,12 @@ public class BoardGame {
     public void setFavorite(boolean favorite) {
         this.favorite = favorite;
     }
+
+    public int getRatingValue() {
+        return ratingValue;
+    }
+
+    public void setRatingValue(int ratingValue) {
+        this.ratingValue = ratingValue;
+    }
 }

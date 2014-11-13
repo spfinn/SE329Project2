@@ -40,6 +40,7 @@ public class DescriptionFragment extends Fragment {
             @Override
             public void onClick(View v) {
                 saveGameInfo();
+                getActivity().onBackPressed();
             }
         });
         Button back = (Button) rootView.findViewById(R.id.back_butt);
