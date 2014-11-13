@@ -184,7 +184,8 @@ public class JSONUtil {
             for(int i = 0 ; i < games.size(); i ++)
             {
                 BoardGame aGame = games.get(i);
-
+                if(aGame.isEnd())
+                    continue;
                 //TODO Here is where you place elements into JSONObject
                 aGameObj = new JSONObject();
                 aGameObj.put("title", aGame.getName());

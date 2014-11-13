@@ -73,13 +73,11 @@ public class ResultFragment extends Fragment {
         ArrayList<BoardGame> allGames = MainActivity.allGamesList;
         for(int i=0; i < allGames.size();i++) {
             BoardGame game = allGames.get(i);
-            if (game.isEnd() && resultGamesList.size() == 0) {
-                resultGamesList.add(game);
-                adapter.notifyDataSetChanged();
-                return;
-            }
             //Checks to see if a game meets requirements.
-            if (showAll) {
+            if(showFavorites){
+             if(game.isFavorite())
+                 resultGamesList.add(game);
+            }else if (showAll) {
                 if (!game.isEnd())
                     resultGamesList.add(game);
 
@@ -88,6 +86,11 @@ public class ResultFragment extends Fragment {
                 resultGamesList.add(game);
             }
             adapter.notifyDataSetChanged();
+        }
+        if(resultGamesList.size()==0) {
+            BoardGame game = new BoardGame("No Games Match Your Criteria");
+            game.setEnd();
+            resultGamesList.add(game);
         }
     }
 
